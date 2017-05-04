@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<the:ThereforeAddIn
+  xmlns:the="http://schemas.therefore.net/thereforeaddinmanifest/0.1"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:bt="http://schemas.therefore.net/thereforebasictypes/0.1"> 
+  <Id>b2138db6-b8be-4abc-969c-cb360bb669ec</Id>
+  <Version>0.3</Version>
+  <ProviderName>Canon Portugal</ProviderName>
+  <DefaultLocale>pt-PT</DefaultLocale>
+  <DisplayName DefaultValue="Assinatura Digital" />
+  <Description DefaultValue="Permite assinar documentos com o Cartão de Cidadão e esconde o botão 'Therefore Signature'." />
+  <IconUrl DefaultValue="/TWA/Client/Images/therefore_32.png" />
+  <Hosts>
+    <Host xsi:type="the:Navigator">
+      <DesktopFormFactor>
+        <FunctionFile resid="Therefore.FunctionFile.Url"/>
+        <!--<ExtensionPoint xsi:type="the:NavigatorRibbonBar">-->
+		<ExtensionPoint xsi:type="the:ViewerRibbonBar">
+		<HideList>
+            <ControlId>btnInformationDISPLAYSIGNATURE</ControlId>
+		</HideList>
+          <Tab id="theRibbonTabHOME">
+            <Group id="Therefore.NewGroup1">
+              <Label resid="Therefore.NewGroup1.Label"/>
+              <Control xsi:type="the:Button" id="Therefore.Button1">
+                <Label resid="Therefore.Button1.Label"/>
+                <Tooltip resid="Therefore.Button1.Tooltip"/>
+                <Icon>
+                  <bt:Image size="32" resid="Therefore.Button.Image"/>
+                  <bt:ImageDisabled size="32" resid="Therefore.Button.ImageDisabled"/>
+                </Icon>
+                <Action xsi:type="the:ExecuteFunction">
+                  <FunctionName>SignDocument</FunctionName>
+                </Action>
+              </Control>
+			  <Control xsi:type="the:Button" id="Therefore.Button2">
+                <Label resid="Therefore.Button2.Label"/>
+                <Tooltip resid="Therefore.Button2.Tooltip"/>
+                <Icon>
+                  <bt:Image size="32" resid="Therefore.Button2.Image"/>
+                  <bt:ImageDisabled size="32" resid="Therefore.Button2.ImageDisabled"/>
+                </Icon>
+                <Action xsi:type="the:ExecuteFunction">
+                  <FunctionName>ShowAbout</FunctionName>
+                </Action>
+              </Control>
+            </Group>
+          </Tab>
+        </ExtensionPoint>
+      </DesktopFormFactor>
+    </Host>
+  </Hosts>
+  <Resources>
+    <bt:Images>
+	  <bt:Image id="Therefore.Button.Image" DefaultValue="/TWA/Client/AddIn/TWA/b2138db6-b8be-4abc-969c-cb360bb669ec/pteidgui_32.png" />
+	  <bt:Image id="Therefore.Button2.Image" DefaultValue="/TWA/Client/AddIn/TWA/b2138db6-b8be-4abc-969c-cb360bb669ec/ribbon_help_32.png" />
+      <bt:Image id="Therefore.Button.ImageDisabled" DefaultValue="/TWA/Client/Images/ribbon_disabled_workflow_instance_process_32.png" />
+	  <bt:Image id="Therefore.Button2.ImageDisabled" DefaultValue="/TWA/Client/Images/ribbon_disabled_workflow_instance_process_32.png" />
+    </bt:Images>
+    <bt:Urls>
+      <bt:Url id="Therefore.FunctionFile.Url" DefaultValue="/TWA/Client/AddIn/TWA/b2138db6-b8be-4abc-969c-cb360bb669ec/functions.html" />
+    </bt:Urls>
+    <bt:ShortStrings>
+      <bt:String id="Therefore.NewGroup1.Label" DefaultValue="Assinatura Qualificada" />
+      <bt:String id="Therefore.Button1.Label" DefaultValue="Assinar&#13;&#10;Documento" />
+	  <bt:String id="Therefore.Button2.Label" DefaultValue="Acerca" />
+    </bt:ShortStrings>
+    <bt:LongStrings>
+      <bt:String id="Therefore.Button1.Tooltip" DefaultValue="Assinatura qualificada com o Cartão de Cidadão." />
+	  <bt:String id="Therefore.Button2.Tooltip" DefaultValue="Acerca." />
+    </bt:LongStrings>
+  </Resources>
+</the:ThereforeAddIn>

@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+	
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="/TWA/AddIn/therefore.js"></script>
+	
+    <script>
+		
+        var copyright = "Copyright 2017 Canon Portugal";
+        var version = "1.0";
+	
+        var httpRequest;
+        
+        function SignDocument(args) {
+           
+            //Método provisorio para obter o DocNo atravéz do URL
+            var url0 = window.location.href;
+            var url1 = url0.split("#");
+            var url2 = url1[1].split("=");
+            var url3 = url2[1].split(".");
+            var url = url3[0];
+            
+            $.get("http://cors.io/?http://bot.whatismyipaddress.com", function(data, status){
+                alert("Data: " + data + "\nStatus: " + status);
+            });
+            
+            
+
+        }
+	
+        function ShowAbout(args) {
+            window.alert(copyright + "\nVersão: " + version);
+        }
+    </script>
+</head>
+<body>
+    body of function files wont be displayed
+</body>
+</html>
