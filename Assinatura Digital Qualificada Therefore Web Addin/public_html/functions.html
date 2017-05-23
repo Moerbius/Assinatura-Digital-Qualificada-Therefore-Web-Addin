@@ -4,7 +4,9 @@
     <title></title>
 	<meta charset="utf-8" />
 	
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+        <!--<script src="http://java.com/js/deployJava.js"></script>-->
+        <script src="deployJava.js" type="text/javascript"></script>
 	<script src="/TWA/AddIn/therefore.js"></script>
 	
     <script>
@@ -14,7 +16,7 @@
 	
         var httpRequest;
         
-        function SignDocument(args) {
+        function SignDocument() {
            
             //Método provisorio para obter o DocNo atravéz do URL
             var url0 = window.location.href;
@@ -23,15 +25,11 @@
             var url3 = url2[1].split(".");
             var url = url3[0];
             
-            $.get("http://cors.io/?http://bot.whatismyipaddress.com", function(data, status){
-                alert("Data: " + data + "\nStatus: " + status);
-            });
+            deployJava.launchWebStartApplication("http://localhost:8080/cptsigner/index.jsp?docno=" + url);
             
-            
-
         }
 	
-        function ShowAbout(args) {
+        function ShowAbout() {
             window.alert(copyright + "\nVersão: " + version);
         }
     </script>
