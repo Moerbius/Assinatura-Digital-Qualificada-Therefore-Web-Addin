@@ -1,40 +1,74 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <title></title>
-	<meta charset="utf-8" />
-	
-        <!--<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
-        <!--<script src="http://java.com/js/deployJava.js"></script>-->
+    <head>
+        <title></title>
+        <meta charset="utf-8" />
+
+        <script src="//cdn.jsdelivr.net/bluebird/3.4.5/bluebird.js"></script>
         <script src="deployJava.js" type="text/javascript"></script>
-	<script src="/TWA/AddIn/therefore.js"></script>
-	
-    <script>
-		
-        var copyright = "Copyright 2017 Canon Portugal";
-        var version = "1.0";
-	
-        var httpRequest;
-        
-        function SignDocument() {
-           
-            //Método provisorio para obter o DocNo atravéz do URL
-            var url0 = window.location.href;
-            var url1 = url0.split("#");
-            var url2 = url1[1].split("=");
-            var url3 = url2[1].split(".");
-            var url = url3[0];
-            
-            deployJava.launchWebStartApplication("http://localhost:8080/cptsigner/index.jsp?docno=" + url);
-            
-        }
-	
-        function ShowAbout() {
-            window.alert(copyright + "\nVersão: " + version);
-        }
-    </script>
-</head>
-<body>
-    body of function files wont be displayed
-</body>
+        <script src="/TWA/AddIn/therefore.js"></script>
+
+        <script>
+
+            var copyright = "Copyright 2017 Canon Portugal";
+            var version = "1.0";
+
+            //var httpRequest;
+
+            function promisify(action) {
+                var args = arguments;
+                return new Promise(function (resolve, reject) {
+                    var callback = function (result) {
+                        if (result.status == "failed") {
+                            reject(new Error(result.error));
+                        } else {
+                            resolve(result);
+                        }
+                    };
+
+                    var params = [];
+                    if (args[1]) {
+                        params = Array.prototype.slice.call(args[1]);
+                    }
+                    params.push(callback);
+
+                    action.apply(this, params);
+                });
+            }
+            ;
+
+            var getCurrentObjectInfoAsync = function () {
+                return promisify(Therefore.context.viewer.getCurrentObjectInfo);
+            };
+
+            var callRequestAsync = function () {
+                return promisify(Therefore.context.xmlWebService.callRequest, arguments);
+            };
+
+            function SignDocument(args) {
+
+                getCurrentObjectInfoAsync()
+                    .then(function (result) {
+                        if (result.docno == '' && result.caseno == '' && result.taskno == '' && result.instanceno == '')
+                            return Promise.reject(new Error("current object info missing"));
+
+                        if (result.docno == '')
+                            return Promise.reject(new Error("document number is empty"));
+
+                        var doc = result.docno;
+                        var docNo = doc.split(".")[0];
+
+                        deployJava.launchWebStartApplication("http://localhost:8080/cptsigner/index.jsp?docno=" + docNo);
+
+                    });
+            };
+
+            function ShowAbout() {
+                window.alert(copyright + "\nVersão: " + version);
+            }
+        </script>
+    </head>
+    <body>
+        body of function files wont be displayed
+    </body>
 </html>
