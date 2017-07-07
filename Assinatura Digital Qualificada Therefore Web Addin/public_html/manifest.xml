@@ -4,7 +4,7 @@
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xmlns:bt="http://schemas.therefore.net/thereforebasictypes/0.1"> 
   <Id>b2138db6-b8be-4abc-969c-cb360bb669ec</Id>
-  <Version>1.0</Version>
+  <Version>1.1</Version>
   <ProviderName>Canon Portugal</ProviderName>
   <DefaultLocale>pt-PT</DefaultLocale>
   <DisplayName DefaultValue="Assinatura Digital" />
